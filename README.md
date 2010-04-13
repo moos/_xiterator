@@ -130,7 +130,7 @@ If `x` is defined globally, its value will be used:  **GOTCHA WARNING!!**
 		x = 0;
 		function test(){
 			var x = 10;
-			_any([1,2,3], "< x") // => true (x=0 is used)
+			_any([1,2,3], "< x") // => false (x=0 is used)
 		} 
 
 ## Original methods
