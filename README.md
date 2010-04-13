@@ -3,11 +3,9 @@
 _xiterator is an extension to the [Underscore](http://documentcloud.github.com/underscore/) Javascript "utility-belt" that allows 
 "expression iterators" in place of a function iterator.
 
-Any of the Underscore methods that accept aniterator as the second arguments can be used with an expression iterator, including:
+Any of the Underscore methods that accept an iterator as the second argument can be used with an expression iterator, including:
  
-	_.each() _.forEach() _.map() _.detect() _.select() 
-	_.filter() _.reject() _.all() _.every() _.any() 
-	_.some() _.max() _.min() _.sortBy() _.times()
+	_.each() _.forEach() _.map() _.detect() _.select() 	_.filter() _.reject() _.all() _.every() _.any() _.some() _.max() _.min() _.sortBy() _.times()
  
 Run [Test suite](http://moos.github.com/_xiterator) and see [Blog post](http://blog.42at.com/_xiterator).
  
@@ -32,15 +30,15 @@ The expression is evaluated for every iteration of the input object.
 
 Works on objects too:	
 
-		_.any({a:1, b:2, c:3}, ">0")
+		_.any({a:1, b:2, c:3}, ">0")	// => true
 	 
 Or using the OO calling convention:
 
-		_([1,2,3]).any(">0")
+		_([1,2,3]).any(">0")	// => true
 
 All the standar Javascript relational operators are suppported: <= < >= > == === != !==	 
 
-### Composite operations:
+### Composite operations
 
 Logical operators:
 
@@ -53,9 +51,9 @@ Parenthetical expressions:
 		_any([1,2,3], "(isNumber && >0) || (isString && != '')")
 			
 			
-###  _.isXXX() methods
+###  _.isXXX() type-checking
 
-Any of the _.isXXX() methods may be used as:
+Any of the _.isXXX() type-checking methods* may be used as:
 
 		_any([1,2,3], "isNumber")
 		
@@ -77,6 +75,7 @@ In addition three new methods have been added: **`_.isEven()`**, **`_.isOdd()`**
 
 		_all(['','  ','\t'], "isBlank") // => true (all whitespace)
 
+(* Except _.isEqual() which takes two arguments)
 
 ### Negation
 
@@ -175,7 +174,7 @@ A semicolon cannot be used in the expression, but a comma operator can:
 		
 		"x=10, <0"	// valid		
 
-However, complicated expressions are best kept as iterator functions.		 
+Complicated expressions are best kept as iterator functions.		 
 
 
 ## License
