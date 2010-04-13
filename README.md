@@ -5,7 +5,8 @@ _xiterator is an extension to the [Underscore](http://documentcloud.github.com/u
 
 Any of the Underscore methods that accept an iterator as the second argument can be used with an expression iterator, including:
  
-	_.each() _.forEach() _.map() _.detect() _.select() 	_.filter() _.reject() _.all() _.every() _.any() _.some() _.max() _.min() _.sortBy() _.times()
+	_.each() _.forEach() _.map() _.detect() _.select() 	_.filter() _.reject()
+	_.all() _.every() _.any() _.some() _.max() _.min() _.sortBy() _.times()
  
 Run [Test suite](http://moos.github.com/_xiterator) and see [Blog post](http://blog.42at.com/_xiterator).
  
