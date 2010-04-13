@@ -9,7 +9,7 @@ Any of the Underscore methods that accept aniterator as the second arguments can
 	_.filter() _.reject() _.all() _.every() _.any() 
 	_.some() _.max() _.min() _.sortBy() _.times()
  
-Run [Test suite](http://github.com/moos/_xiterator/test/index.html) and see [Blog post](http://blog.42at.com/_xiterator).
+Run [Test suite](http://moos.github.com/_xiterator) and see [Blog post](http://blog.42at.com/_xiterator).
  
 ## Usage
 
