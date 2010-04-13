@@ -1,20 +1,24 @@
 # _xiterator.js
 
 _xiterator is an extension to the [Underscore](http://documentcloud.github.com/underscore/) Javascript "utility-belt" that allows 
-"expression iterator" string in the methods that accept a function iterator as the second arguments, including:
+"expression iterators" in place of a function iterator.
+
+Any of the Underscore methods that accept aniterator as the second arguments can be used with an expression iterator, including:
  
 	_.each() _.forEach() _.map() _.detect() _.select() 
 	_.filter() _.reject() _.all() _.every() _.any() 
 	_.some() _.max() _.min() _.sortBy() _.times()
  
-Run [Test suite](http://github.com/moos/_xiterator/index.html) and see [Blog post](http://blog.42at.com/_xiterator).
+Run [Test suite](http://github.com/moos/_xiterator/test/index.html) and see [Blog post](http://blog.42at.com/_xiterator).
  
-## Include
+## Usage
 
 	<script type="text/javascript" src="underscore.js"></script>
 	<script type="text/javascript" src="_xiterator.js"></script>
 
-## Basic usage
+Tested on IE8, FF3, Safari 4, Chrome 4.
+ 
+## Basic expressions
 
 In place of a function iterator,
 	
@@ -30,21 +34,21 @@ Works on objects too:
 
 		_.any({a:1, b:2, c:3}, ">0")
 	 
-OO-calling convention is supported:
+Or using the OO calling convention:
 
 		_([1,2,3]).any(">0")
 
-Any of the relations operators is suppported: <= < >= > == === != !==	 
+All the standar Javascript relational operators are suppported: <= < >= > == === != !==	 
 
 ### Composite operations:
 
-Any of the logical operators is supported:
+Logical operators:
 
 		_any([1,2,3], ">0 && <10")
 
 		_all([1,2,3], "== -1 || >0")
 
-Parenthetical expressions are supported:
+Parenthetical expressions:
 
 		_any([1,2,3], "(isNumber && >0) || (isString && != '')")
 			
@@ -97,7 +101,7 @@ In a composite operation, the regular expression **must explicity include** the 
 
 		_all([1,2,3], "!isUndefined && /\\d+/.test(__value)")
 		
-`__value` is a placeholder variable (see iterator variables below). 		
+`__value` is a placeholder for the iterator variable. 		
 
 
 ## Iterator variables
@@ -109,20 +113,19 @@ The expression can access the three standard arguments of the iterator via the v
 		
 		_.each([1,2,3], '_.include(__list, __value)')
   
-`__key` is a numeric index for arrays and the actual key for objects.
+`__key` is the numeric index for arrays and the actual key for objects.
 
 
 ## Global Scope
 
-The function generated to evaluate the expression is run in the global scope.  
-So reference to local variables or functions should be avoided.  Eg:
+The function generated to evaluate the expression is run in the global scope.  So reference to local variables or functions should be avoided.  Eg:
 
 		function test(){
 			var x = 10;
 			_any([1,2,3], "< x") // => throws an exception, x is undefined
 		} 
 
-If `x` is defined globally, its value will be used:  **GOTCHA!!** 
+If `x` is defined globally, its value will be used:  **GOTCHA WARNING!!** 
 
 		x = 0;
 		function test(){
@@ -136,15 +139,15 @@ Any of the original methods can be accessed by calling the method
 with no arguments, eg:
 
 		var oMap = _.map();	
-		oMap([1,2,3],function(){//...}) 
+		oMap([1,2,3],function(){...}) 
 		
 or:
 
-		_.any()([1,2,3], function(){//...})
+		_.any()([1,2,3], function(){...})
 		
-		_([1,2,3]).any()(function(){//...})
+		_([1,2,3]).any()(function(){...})
 
-Experssions cannot be used on original methods:
+Experssions cannot be used with original methods:
 		
 		oMap([1,2,3],"__value * 2") // => Exception: iterator is not a function
 		
@@ -173,6 +176,7 @@ A semicolon cannot be used in the expression, but a comma operator can:
 		"x=10, <0"	// valid		
 
 However, complicated expressions are best kept as iterator functions.		 
+
 
 ## License
 
