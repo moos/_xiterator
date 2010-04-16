@@ -43,38 +43,38 @@ All the standar Javascript relational operators are suppported: <= < >= > == ===
 
 Logical operators:
 
-		_any([1,2,3], ">0 && <10")
+		_.any([1,2,3], ">0 && <10")
 
-		_all([1,2,3], "== -1 || >0")
+		_.all([1,2,3], "== -1 || >0")
 
 Parenthetical expressions:
 
-		_any([1,2,3], "(isNumber && >0) || (isString && != '')")
+		_.any([1,2,3], "(isNumber && >0) || (isString && != '')")
 			
 			
 ###  _.isXXX() type-checking
 
 Any of the _.isXXX() type-checking methods* may be used as:
 
-		_any([1,2,3], "isNumber")
+		_.any([1,2,3], "isNumber")
 		
 ...is equivalent to
 	 
-		_any([1,2,3], function(num){return _.isNumber(num);});
+		_.any([1,2,3], function(num){return _.isNumber(num);});
 
 Or in combination:
 
-		_any([1,2,3], "isNumber || isString")
+		_.any([1,2,3], "isNumber || isString")
 
-		_any([1,2,3], "isNumber && >0")
+		_.any([1,2,3], "isNumber && >0")
 
 In addition three new methods have been added: **`_.isEven()`**, **`_.isOdd()`**, and **`_.isBlank()`**
 
-		_any([1,2,3], "isEven") // => true
+		_.any([1,2,3], "isEven") // => true
 
-		_all([1,2,3], "isOdd") // => false
+		_.all([1,2,3], "isOdd") // => false
 
-		_all(['','  ','\t'], "isBlank") // => true (all whitespace)
+		_.all(['','  ','\t'], "isBlank") // => true (all whitespace)
 
 (* Except _.isEqual() which takes two arguments)
 
@@ -82,24 +82,24 @@ In addition three new methods have been added: **`_.isEven()`**, **`_.isOdd()`**
 
 Use `!` for negation:
 
-		_any([1,2,3], "!isString")	// => true
+		_.any([1,2,3], "!isString")	// => true
 
-		_all([1,2,3], "!isString && !isDate ")	// => true
+		_.all([1,2,3], "!isString && !isDate ")	// => true
 		
 
 ### Regular expressions
 
 Stand-alone regular expressions can be used as is:
 
-		_any([1,2,3], /[a-z]/i)		
+		_.any([1,2,3], /[a-z]/i)		
 
 or in a string:
 
-		_any([1,2,3], "/\\d+/")		// note escaped \
+		_.any([1,2,3], "/\\d+/")		// note escaped \
 		
 In a composite operation, the regular expression **must explicity include** the .test(__value) part:
 
-		_all([1,2,3], "!isUndefined && /\\d+/.test(__value)")
+		_.all([1,2,3], "!isUndefined && /\\d+/.test(__value)")
 		
 `__value` is a placeholder for the iterator variable. 		
 
@@ -122,7 +122,7 @@ The function generated to evaluate the expression is run in the global scope.  S
 
 		function test(){
 			var x = 10;
-			_any([1,2,3], "< x") // => throws an exception, x is undefined
+			return _.any([1,2,3], "< x"); // => throws an exception, x is undefined
 		} 
 
 If `x` is defined globally, its value will be used:  **GOTCHA WARNING!!** 
@@ -130,7 +130,14 @@ If `x` is defined globally, its value will be used:  **GOTCHA WARNING!!**
 		x = 0;
 		function test(){
 			var x = 10;
-			_any([1,2,3], "< x") // => false (x=0 is used)
+			return _.any([1,2,3], "< x"); // => false (x=0 is used)
+		} 
+
+Alternatively, pass in a context as 3rd argument:
+
+		function test(){
+			var x = 10;
+			return _.any([1,2,3], "< this.x", {x: x});  // => true
 		} 
 
 ## Original methods
