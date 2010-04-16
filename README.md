@@ -152,7 +152,6 @@ or:
 
 		_.any()([1,2,3], function(){...})
 		
-		_([1,2,3]).any()(function(){...})
 
 Experssions cannot be used with original methods:
 		
